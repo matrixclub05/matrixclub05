@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='style.css'/>
 </head>
 <body cz-shortcut-listen="true">
 <div class="container">
@@ -11,79 +10,7 @@
     <div class="placeholder"></div>
     <div class="bar" style="background-color: rgb(153, 153, 153);"></div>
     <div class="content"></div>
-
 </div>
-<script>
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    var isSafari = navigator.userAgent.indexOf("Safari") > -1;
-    var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
-    var isOpera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
-    var firefox = /firefox/i.test(navigator.userAgent)
-    var menu = document.querySelectorAll('.bar'),
-            len = menu.length;
-
-
-    if (!isSafari || !isFirefox || !isOpera) {
-        (function () {
-            var winScrollY = window.scrollY,
-                    requiredTop = 0,
-                    top,
-                    data = [];
-            if (!window.requestAnimationFrame) {
-                window.requestAnimationFrame =
-                        window.webkitRequestAnimationFrame ||
-                        window.mozRequestAnimationFrame ||
-                        window.oRequestAnimationFrame ||
-                        window.msRequestAnimationFrame ||
-                        function (callback) {
-                            window.setTimeout(callback, 1000 / 60);
-                        };
-
-            }
-
-            document.addEventListener('scroll', function () {
-                winScrollY = window.scrollY;
-                // update();
-                requestAnimationFrame(update);
-
-            }, false);
-
-            for (var i = 0; i < len; i++) {
-                top = menu[i].getBoundingClientRect().top;
-                data.push({
-                    origTop: top + winScrollY,
-                    fixed: false
-                });
-                menu[i].classList.add('fixed');
-                menu[i].style.transform = 'translate3d(-50%, ' + top + 'px, 0px)';
-            }
-
-            function processHeader(data, header) {
-                var pos = (data.origTop - winScrollY);
-                if (pos > 0 ) {
-                    data.fixed = false;
-                    header.style.transform = 'translate3d(-50%, ' + pos + 'px, 0px)';
-                }
-                if (!data.fixed && pos <= 0 ) {
-                    data.fixed = true;
-                    header.style.transform = 'translate3d(-50%, 0px, 0px)';
-                }
-            }
-
-            function update() {
-                var i = 0;
-                for (i; i < len; i++) {
-                    processHeader(data[i], menu[i]);
-                }
-            }
-        })();
-    } else {
-        for (var i = 0; i < len; i++) {
-            menu[i].parentElement.classList.add('sticky');
-        }
-    }
-
-
-</script>
+<script src="sticky.js"></script>
 </body>
 </html>

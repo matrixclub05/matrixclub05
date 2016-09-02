@@ -1,0 +1,37 @@
+body {
+    margin: 0
+}
+
+.content {
+    height: 2000px
+}
+
+.container {
+    position: relative;
+    will-change: position, top, scroll-position
+}
+
+.bar {
+    width: 600px;
+    height: 50px;
+    background-color: #333333;
+    position: relative;
+    left: 50%;
+    top: 0;
+    backface-visibility: hidden;
+    will-change: transform;
+    -moz-transform: translate3d(-50%, 0, 0);
+    -ms-transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
+    -o-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0)
+}
+
+.fixed {
+    position: fixed
+}
+
+.placeholder {
+    height: 200px;
+    width: 100%
+}
